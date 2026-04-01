@@ -28,6 +28,5 @@ runs/
 # Temporary and Output Files
 temp_*.py
 output_*.*
-*.mp4
 *.avi
 inference_results*.json
