@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# IDE / Editor
+.vscode/
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Datasets
+YoloDataset/
+dataset_abs.yaml
+
+# Model Weights
+*.pt
+*.pth
+
+# YOLO Runs / Training Outputs
+runs/
+
+# Temporary and Output Files
+temp_*.py
+output_*.*
+*.mp4
+*.avi
+inference_results*.json
