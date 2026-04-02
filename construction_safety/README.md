@@ -1,4 +1,4 @@
-<h1 align="center">
+﻿<h1 align="center">
   🏗️ Construction Site Safety Monitor
 </h1>
 
@@ -21,7 +21,7 @@ Detects workers ➡️ estimates pose ➡️ verifies PPE (helmet/vest/harness/g
 
 ## 🏗️ Architecture
 
-`mermaid
+```mermaid
 graph TD
     A[🎥 Camera Frame] --> B[👁️ YOLOv8n<br/>Worker Detection]
     B --> C[🏷️ ByteTracker<br/>Persistent Track IDs]
@@ -37,7 +37,7 @@ graph TD
 
     F --> G[⚖️ ComplianceEngine<br/>Zone Rules]
     G --> H[📊 ViolationReport JSON +<br/>Visual Annotated Video]
-`
+```
 
 ### 🧠 Key Insight: Keypoint-anchored PPE verification
 Instead of object detection across the entire frame, PPE is checked strictly within anatomical Regions of Interest (ROIs) derived from pose keypoints:
@@ -52,7 +52,7 @@ Instead of object detection across the entire frame, PPE is checked strictly wit
 
 ## 🚀 Installation
 
-`ash
+```bash
 # 1. Clone the repository / initialize workspace
 cd construction_safety/
 
@@ -62,7 +62,7 @@ python -m venv .venv
 
 # 3. Install dependencies
 pip install -r requirements.txt
-`
+```
 
 ---
 
@@ -70,7 +70,7 @@ pip install -r requirements.txt
 
 Run end-to-end evaluation on videos or images locally.
 
-`ash
+```bash
 # Single image inference
 python run_inference.py --input D:/Construction/YoloDataset/images/test/image1.jpg
 
@@ -79,7 +79,7 @@ python run_inference.py --input D:/Construction/Construction.mp4 --video
 
 # Inference with specific zone rules applied
 python run_inference.py --input image.jpg --zone elevated_zone
-`
+```
 
 ---
 
@@ -96,18 +96,18 @@ python run_inference.py --input image.jpg --zone elevated_zone
 
 ## 🎓 Training Pipeline
 
-All training steps (data prep, YOLOv8 fine-tuning, and MobileNetV3 head training) are contained within the 	rain.ipynb Jupyter Notebook.
+All training steps (data prep, YOLOv8 fine-tuning, and MobileNetV3 head training) are contained within the `train.ipynb` Jupyter Notebook.
 
-1. Open 	rain.ipynb in your Notebook environment.
+1. Open `train.ipynb` in your Notebook environment.
 2. Run data engineering cells to process the dataset and generate Ground Truth crops.
 3. Train the MobileNetV3 classification heads.
-4. Export weights to the models/ directory for immediate inference.
+4. Export weights to the `models/` directory for immediate inference.
 
 ---
 
 ## 📂 Project Structure
 
-`	ext
+```text
 construction_safety/
 ├── requirements.txt            <- Python dependencies
 ├── pytest.ini                  <- Unit test configuration
@@ -131,4 +131,4 @@ construction_safety/
 └── tests/
     ├── test_pipeline.py        <- Inference & architectural unit tests
     └── test_compliance.py      <- Business logic unit tests
-`
+```
