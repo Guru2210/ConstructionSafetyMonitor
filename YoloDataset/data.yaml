@@ -1,0 +1,29 @@
+# Ultralytics 🚀 AGPL-3.0 License - https://ultralytics.com/license
+
+# Construction-PPE dataset - Local YoloDataset
+# NOTE: The training notebook (train.ipynb) auto-generates a runtime dataset.yaml
+# pointing to the absolute path of this dataset at execution time.
+# This file is a reference copy documenting the dataset structure.
+
+# Train/val/test sets (relative to 'path')
+path: .  # dataset root dir (set at runtime by notebook)
+train: images/train   # 1132 images
+val:   images/val     # 143 images
+test:  images/test    # 141 images
+
+# Number of classes
+nc: 11
+
+# Classes
+names:
+  0: helmet
+  1: gloves
+  2: vest
+  3: boots
+  4: goggles
+  5: none
+  6: Person
+  7: no_helmet
+  8: no_goggle
+  9: no_gloves
+  10: no_boots

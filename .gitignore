@@ -15,7 +15,6 @@ env/
 .ipynb_checkpoints/
 
 # Datasets
-YoloDataset/
 dataset_abs.yaml
 
 
