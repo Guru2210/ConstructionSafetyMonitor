@@ -50,8 +50,13 @@ Instead of object detection across the entire frame, PPE is checked strictly wit
 
 ---
 
-## 🚀 Installation
+## 🚀 Prerequisites & Installation
 
+**Prerequisites:**
+- Python 3.9+
+- NVIDIA GPU (optional but recommended for real-time inference)
+
+### 💻 Local Setup
 ```bash
 # 1. Clone the repository / initialize workspace
 cd construction_safety/
@@ -59,10 +64,18 @@ cd construction_safety/
 # 2. Create and activate a virtual environment
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1  # Windows
+# source .venv/bin/activate   # Linux/Mac
 
 # 3. Install dependencies
 pip install -r requirements.txt
 ```
+
+### ☁️ Google Colab Setup
+To run inference or training in Colab:
+1. Open Google Colab and select a GPU runtime (`Runtime > Change runtime type > T4 GPU`).
+2. Clone the repository in a cell: `!git clone <your-repo-url> && cd construction_safety`
+3. Install dependencies: `!pip install -r requirements.txt`
+4. Run inference CLI commands or open `train.ipynb` to execute the pipeline.
 
 ---
 
@@ -102,6 +115,25 @@ All training steps (data prep, YOLOv8 fine-tuning, and MobileNetV3 head training
 2. Run data engineering cells to process the dataset and generate Ground Truth crops.
 3. Train the MobileNetV3 classification heads.
 4. Export weights to the `models/` directory for immediate inference.
+
+---
+
+
+## ⚖️ Evaluation & Limitations
+
+### 🎯 Key Design Decisions
+- **Two-Stage Cascade Architecture**: Instead of training a monolithic object detector to find thousands of tiny PPE objects, we chose a pose-driven cascade. YOLOv8n detects workers and pose keypoints, while hyper-lightweight MobileNetV3 classifiers verify specific PPE within those keypoints. This prevents class imbalance and allows easy addition of new PPE types.
+- **Benefit-of-the-Doubt Compliance**: If a worker's body part is occluded (resulting in a degenerate coordinate crop), the system gracefully registers an "unknown" status rather than immediately triggering a false positive violation.
+
+### 🔍 Honest Evaluation
+**Where the model performs well:**
+- **Clear Line of Sight**: Exceptional accuracy when workers are somewhat unobstructed and upright in medium-to-close shots.
+- **Speed**: The combination of Nano-YOLO and MobileNetV3 allows the pipeline to run efficiently at high frame rates, even on modest hardware.
+
+**Where it struggles (Known Limitations):**
+- **Dense Crowds & Extreme Occlusions**: If workers overlap heavily, ByteTracker can lose IDs, and YOLO-pose estimates can warp, leading to inaccurate ROI crops (e.g., evaluating Worker A's vest using Worker B's keypoints).
+- **Distant Subjects**: Tiny worker representations yield pixel-starved anatomical crops (e.g., 2x2 pixels for boots), which causes the MobileNet classifiers to drop in reliability.
+- **Harness Detection**: Safety harnesses blend easily with high-vis vests and lack solid boundaries. Relying on diagonal shoulder-to-hip interpolation is noisy, making it the most challenging PPE item to verify.
 
 ---
 
