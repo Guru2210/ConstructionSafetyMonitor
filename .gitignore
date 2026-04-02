@@ -18,9 +18,6 @@ env/
 YoloDataset/
 dataset_abs.yaml
 
-# Model Weights
-*.pt
-*.pth
 
 # YOLO Runs / Training Outputs
 runs/
