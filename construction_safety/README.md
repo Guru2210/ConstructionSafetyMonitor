@@ -142,25 +142,22 @@ All training steps (data prep, YOLOv8 fine-tuning, and MobileNetV3 head training
 ```text
 construction_safety/
 ├── requirements.txt            <- Python dependencies
-├── pytest.ini                  <- Unit test configuration
 ├── README.md                   <- This documentation file
 ├── run_inference.py            <- CLI entrypoint for pipeline execution
-├── src/
-│   ├── config.py               <- System configurations, paths, thresholds
-│   ├── models/
-│   │   ├── detector.py         <- YOLOv8 worker detection module
-│   │   ├── pose.py             <- YOLOv8 pose & ROI module
-│   │   ├── ppe_heads.py        <- MobileNetV3 classification
-│   │   └── tracker.py          <- ByteTracker integration
-│   ├── pipeline/
-│   │   ├── inference.py        <- End-to-end orchestrator
-│   │   ├── compliance.py       <- Business logic & violations
-│   │   ├── zones.py            <- Zone management routines
-│   │   └── reporter.py         <- Output standardization
-│   └── utils/
-│       ├── drawing.py          <- OpenCV visual annotation hooks
-│       └── video.py            <- Efficient frame extraction/writing
-└── tests/
-    ├── test_pipeline.py        <- Inference & architectural unit tests
-    └── test_compliance.py      <- Business logic unit tests
+└── src/
+    ├── config.py               <- System configurations, paths, thresholds
+    ├── models/
+    │   ├── detector.py         <- YOLOv8 worker detection module
+    │   ├── pose.py             <- YOLOv8 pose & ROI module
+    │   ├── ppe_heads.py        <- MobileNetV3 classification
+    │   └── tracker.py          <- ByteTracker integration
+    ├── pipeline/
+    │   ├── inference.py        <- End-to-end orchestrator
+    │   ├── compliance.py       <- Business logic & violations
+    │   ├── zones.py            <- Zone management routines
+    │   └── reporter.py         <- Output standardization
+    └── utils/
+        ├── drawing.py          <- OpenCV visual annotation hooks
+        └── video.py            <- Efficient frame extraction/writing
+
 ```
